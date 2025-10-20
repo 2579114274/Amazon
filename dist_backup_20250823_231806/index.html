@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
+    <script>
+      (function() {
+        try {
+          var host = (location && location.hostname) ? location.hostname : '';
+          if (!host) { document.title = 'Store'; return; }
+          // Remove common www prefix
+          host = host.replace(/^www\./i, '');
+          // Title-case segments
+          var pretty = host.split('.').filter(Boolean).map(function(seg){
+            return seg.charAt(0).toUpperCase() + seg.slice(1);
+          }).join(' · ');
+          document.title = pretty || 'Store';
+        } catch (e) { document.title = 'Store'; }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-CxfBdlRd.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-n1IJH_3T.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

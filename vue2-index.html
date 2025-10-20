@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Spoon - Products</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f9fa;
+        }
+
+        .products-page {
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-banner {
+            background: #8b5cf6;
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #4c1d95;
+            letter-spacing: -1px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #4c1d95;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #7c3aed;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Products Section Styles */
+        .products-section {
+            background: #e0e7ff;
+            padding: 60px 40px;
+            min-height: 100vh;
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-pricing {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: 800;
+            color: #dc2626;
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .shop-button {
+            width: 100%;
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #374151;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .shop-button:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+
+        .cart-icon {
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .navigation {
+                gap: 20px;
+            }
+            
+            .hero-section {
+                padding: 40px 20px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 16px;
+            }
+            
+            .products-section {
+                padding: 40px 20px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .product-image {
+                height: 180px;
+            }
+            
+            .product-info {
+                padding: 15px;
+            }
+            
+            .product-name {
+                font-size: 16px;
+            }
+            
+            .product-description {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .top-banner {
+                font-size: 12px;
+                padding: 6px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="products-page">
+            <!-- Header Section -->
+            <header class="header">
+                <div class="top-banner">
+                    <span class="banner-text">✨Free Shipping, and 80,000+ 5-Star Reviews✨</span>
+                </div>
+                <div class="header-content">
+                    <div class="logo">MAGIC SPOON</div>
+                    <nav class="navigation">
+                        <a href="#" class="nav-link">SNACKS</a>
+                        <a href="#" class="nav-link">SHOP ALL</a>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">EXPLORE OUR PRODUCTS</h1>
+                    <button class="cta-button" @click="scrollToProducts">SHOP ALL</button>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section class="products-section" ref="productsSection">
+                <div class="products-grid">
+                    <div 
+                        v-for="product in products" 
+                        :key="product.id" 
+                        class="product-card"
+                    >
+                        <div class="product-image">
+                            <img :src="product.image" :alt="product.name" />
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-description">{{ product.description }}</p>
+                            <div class="product-pricing">
+                                <span class="current-price">${{ product.currentPrice }}</span>
+                                <span class="original-price">${{ product.originalPrice }}</span>
+                            </div>
+                            <button class="shop-button" @click="addToCart(product)">
+                                <span class="cart-icon">🛒</span>
+                                SHOP NOW
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                products: [
+                    {
+                        id: 1,
+                        name: 'HARIBO Gummi Candy',
+                        description: 'HARIBO Gummi Candy, Original Goldbears Gummy Bears, 3 Pound Party Size Bag (Pack of 4) Delicious Soft & Chewy Sweet Snacks, Assorted Fruity Flavors',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '43.44'
+                    },
+                    {
+                        id: 2,
+                        name: 'STARBURST Fruit Chews',
+                        description: 'STARBURST Fruit Chews Candy - FaveREDS Minis, 8oz (Pack of 8) - Delicious STARBURST, Bulk Mini Candy, Bulk Box',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '23.04'
+                    },
+                    {
+                        id: 3,
+                        name: 'SKITTLES & STARBURST Assorted Candy Variety Pack',
+                        description: 'SKITTLES & STARBURST Assorted Candy Variety Pack for Holidays, Candy Assortment, Party Favors, 62.79 oz (30 Count) Bulk Box',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '29.88'
+                    },
+                    {
+                        id: 4,
+                        name: 'TWIX Bulk Chocolate Candy',
+                        description: 'TWIX Bulk Chocolate Candy Individually Wrapped, Full Size, Caramel Chocolate Cookie Candy Bar, Perfect for Snacks, Parites, Goodie Bags, Holidays 36-Count Box',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '43.47'
+                    },
+                    {
+                        id: 5,
+                        name: 'HERSHEY\'S Chocolate Bars',
+                        description: 'HERSHEY\'S Milk Chocolate Bars, Bulk Chocolate Candy, Individually Wrapped, Perfect for Snacks, Parties, Goodie Bags, Holidays',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '35.99'
+                    },
+                    {
+                        id: 6,
+                        name: 'Peanut M&M\'s',
+                        description: 'M&M\'S Peanut Chocolate Candy, Bulk Party Size, 40 oz Bag, Individually Wrapped, Perfect for Snacks, Parties, Goodie Bags',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '28.50'
+                    },
+                    {
+                        id: 7,
+                        name: 'CHEEZ-IT Crackers',
+                        description: 'CHEEZ-IT Original Baked Snack Crackers, 1.5 oz Individual Bags (Pack of 40) - Perfect for Lunch Boxes, Snacks, and On-the-Go',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '24.99'
+                    },
+                    {
+                        id: 8,
+                        name: 'ROLD GOLD Pretzels',
+                        description: 'ROLD GOLD Tiny Twists Pretzels, 1 oz Individual Bags (Pack of 40) - Perfect for Lunch Boxes, Snacks, and On-the-Go',
+                        image: 'https://pics3.baidu.com/feed/b3119313b07eca80b9a04536358709cda34483eb.jpeg@f_auto?token=081e88c72338a76edf3072ea593c5077',
+                        currentPrice: '0.01',
+                        originalPrice: '19.99'
+                    }
+                ]
+            },
+            methods: {
+                scrollToProducts() {
+                    this.$refs.productsSection.scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                },
+                addToCart(product) {
+                    alert(`Added ${product.name} to cart!`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

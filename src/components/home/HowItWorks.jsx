@@ -1,0 +1,104 @@
+
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+
+export default function HowItWorks() {
+  return (
+    <section className="relative h-[100vh] min-h-[620px] overflow-hidden">
+      {/* 背景渐变 */}
+      <div
+        className="absolute inset-0 -z-20"
+        style={{
+          background:
+            "linear-gradient(135deg, #6B2FE8 0%, #C03DF2 35%, #FF78C9 70%, #FFD36E 100%)",
+        }}
+      />
+      {/* 柔和光晕 */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(60% 40% at 70% 20%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 60%)",
+        }}
+      />
+
+      {/* 装饰：星星 + 月亮 */}
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/ms-star_2x.svg?v=106837821646350313091748358446&auto=format,compress"
+        alt=""
+        className="hidden md:block absolute left-10 top-14 w-6 opacity-90"
+      />
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/ms-star_2x.svg?v=106837821646350313091748358446&auto=format,compress"
+        alt=""
+        className="absolute left-6 bottom-24 w-6 opacity-80"
+      />
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/ms-star_2x.svg?v=106837821646350313091748358446&auto=format,compress"
+        alt=""
+        className="absolute right-10 top-20 w-6 opacity-80"
+      />
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/ms-gradient-moon_2x.svg?v=62912136052706985281748358446&auto=format,compress"
+        alt=""
+        className="hidden md:block absolute right-[22%] top-[10%] w-40 opacity-90"
+      />
+
+      {/* 背景形状（山丘等） */}
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/ms-purple-mountain.svg?v=97373182935151277731748358445&auto=format,compress"
+        alt=""
+        className="hidden md:block absolute left-[18%] bottom-0 w-[520px] opacity-70"
+      />
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/ms-hill-purple-white_2x.svg?v=107546375683318706301748358442&auto=format,compress"
+        alt=""
+        className="hidden md:block absolute right-[15%] bottom-0 w-[520px] opacity-70"
+      />
+
+      {/* 左右产品图 */}
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/MS-Cereal-Left-02.png?v=31285387706231687731748358445&auto=format,compress&w=1500"
+        alt="Magic Spoon Cereal Left"
+        className="pointer-events-none absolute left-[-60px] sm:left-[-80px] md:left-[-100px] bottom-0 w-[300px] sm:w-[380px] md:w-[460px] lg:w-[540px] xl:w-[620px] object-contain drop-shadow-[0_12px_40px_rgba(0,0,0,0.25)]"
+      />
+      <img
+        src="https://magicspoon.imgix.net/t/667/assets/MS-Cereal-Right-02.png?v=53237899182246501941748358445&auto=format,compress&w=1500"
+        alt="Magic Spoon Cereal Right"
+        className="pointer-events-none absolute right-[-60px] sm:right-[-90px] md:right-[-110px] bottom-0 w-[320px] sm:w-[420px] md:w-[520px] lg:w-[600px] xl:w-[660px] object-contain drop-shadow-[0_12px_40px_rgba(0,0,0,0.25)]"
+      />
+
+      {/* 中央文案与CTA */}
+      <div className="relative z-20 h-full flex items-center justify-center text-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl md:max-w-4xl"
+        >
+          <h2 className="text-white font-extrabold tracking-tight leading-[1.05] text-4xl sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-[0_6px_24px_rgba(0,0,0,0.2)]">
+            A whole
+            <br className="hidden sm:block" />
+            world of
+            <br className="hidden sm:block" />
+            flavor.
+          </h2>
+
+          <div className="mt-10 relative inline-block">
+            {/* 椭圆高光底座（按钮下方的紫色椭圆） */}
+            <div className="absolute left-1/2 -translate-x-1/2 -top-2 -z-10 w-56 md:w-64 h-10 rounded-full bg-gradient-to-r from-[#3B1DC9] to-[#7A3DF3] blur-[8px] opacity-80" />
+            <Link to={createPageUrl("Products")}>
+              <Button className="rounded-full px-10 py-4 text-base md:text-lg font-extrabold bg-[#5F2FE8] hover:bg-[#4C23C9] text-white shadow-[0_14px_40px_rgba(40,0,120,0.35)]">
+                TRY NOW
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
