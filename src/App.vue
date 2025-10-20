@@ -35,7 +35,7 @@ export default {
     return {
       contTop: '0', // 内容缩放后距离顶部的距离
       zIndex: -1, // 遮挡层的层级
-      top: '100vh', // 遮挡层的位置
+      top: '100vh', // 遮挡层的位置1
       loading: false // 遮挡层的加载状态
     }
   },
