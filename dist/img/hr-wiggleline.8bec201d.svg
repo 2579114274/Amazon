@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 4">
+
+    <path fill="none" stroke="#3F0796" stroke-width="1" class="st0" d="M0,3.5 c 5,0, 5, -3, 10, -3 s 5,3, 10, 3 c 5,0, 5, -3, 10, -3 s 5,3, 10, 3"/>
+
+        <style type="text/css">
+        .st0 {
+            animation: shift 1.2s linear infinite;
+        }
+        @keyframes shift {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-20px);
+            }
+        }
+        </style>
+</svg>
