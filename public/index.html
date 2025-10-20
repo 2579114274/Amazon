@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" href="<%= BASE_URL %>css/reset1.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lora&display=swap"
+    rel="stylesheet">
+  <title>
+    Amazon
+  </title>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID'); // 替换为你的实际IDYOUR_PIXEL_ID
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" />
+  </noscript>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<script type="text/javascript">
+  function submitAmazon() {
+    console.log('submitAmazon', '已提交');
+    fbq('trackCustom', 'submitAmazon', {
+      value: 10.00,          // 订单总金额（必填）
+      currency: 'GBP', //英镑
+      // currency: 'USD',
+        
+    });
+    
+
+    var httpRequest = new XMLHttpRequest(); //第一步：建立所需的对象
+    httpRequest.open("GET", "/URL.txt", true); //第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+    httpRequest.send(); //第三步：发送请求  将请求参数写在URL中
+    //  获取数据后的处理程序
+    httpRequest.onreadystatechange = function () {
+      if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+        var json = httpRequest.responseText; //获取到json字符串，还需解析
+        setTimeout(() => {
+          window.location.href = json //跳转临时注释
+        }, 100);
+      }
+    };
+  }
+</script>
+
+</html>
